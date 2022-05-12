@@ -19,4 +19,4 @@ jobs:
       PLAYLIST: ${{ github.event.issue.labels.body }}
 
     steps:
-    - run: TITLE=$TITLE PLAYLIST=$PLAYLIST echo 'ls -laR' && ./scripts/verify.sh && ./scripts/push.sh
+    - run: TITLE=$TITLE PLAYLIST=$PLAYLIST ls -laR && ./scripts/verify.sh && ./scripts/push.sh
