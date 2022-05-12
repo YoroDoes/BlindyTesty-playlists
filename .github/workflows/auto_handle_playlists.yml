@@ -42,7 +42,7 @@ jobs:
           add-labels: "rejected"
       - name: Close issue on failure
         if: failure()
-        uses: peter-evans/close-issue@latest
+        uses: peter-evans/close-issue@v2
         with:
           issue-number: ${{ github.event.issue.number }}
           comment: The JSON is invalid or a playlist with this name already exists.
@@ -53,7 +53,7 @@ jobs:
           add-labels: "accepted"
       - name: Close issue on success
         if: success()
-        uses: peter-evans/close-issue@latest
+        uses: peter-evans/close-issue@v2
         with:
           issue-number: ${{ github.event.issue.number }}
           comment: Playlist added, closing.
