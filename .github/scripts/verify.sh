@@ -1,3 +1,5 @@
 #!/bin/sh
 
-echo "verifying"
+echo "verifying $TITLE"
+
+echo "content:\n$PLAYLIST"
