@@ -24,11 +24,12 @@ jobs:
         run: ./.github/scripts/create_playlist.sh
       - name: Validate JSON
         id: validation
-        uses: docker://orrosenblatt/validate-json-action:latest
+        uses: ScratchAddons/validate-json-action@master
         env:
-          INPUT_SCHEMA: .schema.json
-          INPUT_JSONS: playlists/${{ github.event.issue.title }}.json
+          schema: .schema.json
+          jsons: playlists/${{ github.event.issue.title }}.json
+          separator: ','
       - name: Push playlist
         run: ./.github/scripts/push.sh
         env:
-          INVALID: ${{join(steps.validation.outputs.*, '\n')}}
+          INVALID: ${{ steps.validation.outputs.invalid }}
