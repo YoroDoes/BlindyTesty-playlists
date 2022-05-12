@@ -45,7 +45,9 @@ jobs:
         uses: peter-evans/close-issue@v2
         with:
           issue-number: ${{ github.event.issue.number }}
-          comment: The JSON is invalid or a playlist with this name already exists.
+          comment: |
+            The JSON is invalid or a playlist with this name already exists.
+            ${{ steps.validation.outputs.invalid }}
       - name: Accept issue
         if: success()
         uses: andymckay/labeler@master
