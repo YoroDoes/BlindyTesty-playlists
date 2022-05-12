@@ -7,7 +7,7 @@ on:
 jobs:
   auto_handle_playlists:
     name: Accept or reject playlist
-    if: ${{ contains(github.event.issue.labels.*.name,'playlist') && !contains(github.event.issue.labels.*.name,'closed') }}
+    if: ${{ contains(github.event.issue.labels.*.name,'playlist') && !contains(github.event.issue.state,'close') }}
 
     runs-on: ubuntu-latest
     permissions:
