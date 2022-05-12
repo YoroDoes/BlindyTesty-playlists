@@ -27,7 +27,7 @@ jobs:
         uses: docker://orrosenblatt/validate-json-action:latest
         env:
           INPUT_SCHEMA: ./template.json
-          INPUT_JSONS: ./playlists/$TITLE.json
+          INPUT_JSONS: ./playlists/${{ github.event.issue.title }}.json
       - name: Push playlist
         env:
           INVALID: ${{ steps.validation.outputs.invalid }}
