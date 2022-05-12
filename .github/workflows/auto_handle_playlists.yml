@@ -29,6 +29,6 @@ jobs:
           INPUT_SCHEMA: .schema.json
           INPUT_JSONS: playlists/${{ github.event.issue.title }}.json
       - name: Push playlist
-        env:
-          INVALID: ${{ steps.validation.outputs.invalid }}
         run: ./.github/scripts/push.sh
+        env:
+          INVALID: ${{join(steps.validation.outputs.*, '\n')}}
