@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo "pushing"
+echo "depending on $INVALID, pushing $TITLE"

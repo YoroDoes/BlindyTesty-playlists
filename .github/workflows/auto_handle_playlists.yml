@@ -14,9 +14,21 @@ jobs:
       issues: write
       contents: write
 
+    env:
+      TITLE: ${{ github.event.issue.title }}
+      PLAYLIST: ${{ github.event.issue.body }}
+
     steps:
       - uses: actions/checkout@v1
-      - env:
-          TITLE: ${{ github.event.issue.title }}
-          PLAYLIST: ${{ github.event.issue.body }}
-        run: chmod +x .github/scripts/*.sh && ./.github/scripts/verify.sh && ./.github/scripts/push.sh
+      - name: Create JSON
+        run: ./.github/scripts/create_playlist.sh
+      - name: Validate JSON
+        id: validation
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: ./template.json
+          INPUT_JSONS: ./playlists/$TITLE.json
+      - name: Push playlist
+        env:
+          INVALID: ${{ steps.validation.outputs.invalid }}
+        run: ./.github/scripts/push.sh
