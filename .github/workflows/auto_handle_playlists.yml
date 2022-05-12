@@ -1,0 +1,22 @@
+name: Auto accept/reject pull requests
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  auto_handle_playlists:
+    name: Accept or reject playlist
+    if: ${{ contains(github.event.issue.labels.*.name,'playlist') }}
+
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: write
+      
+    env: 
+      TITLE: ${{ github.event.issue.labels.title }}
+      PLAYLIST: ${{ github.event.issue.labels.body }}
+
+    steps:
+    - run: TITLE=$TITLE PLAYLIST=$PLAYLIST ./scripts/verify.sh && ./scripts/push.sh
