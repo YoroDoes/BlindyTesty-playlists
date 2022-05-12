@@ -19,4 +19,5 @@ jobs:
       PLAYLIST: ${{ github.event.issue.labels.body }}
 
     steps:
-      - run: TITLE=$TITLE PLAYLIST=$PLAYLIST ls -laR && ./.github/scripts/verify.sh && ./.github/scripts/push.sh
+      - uses: actions/checkout@v1
+      - run: ./.github/scripts/verify.sh && ./.github/scripts/push.sh
