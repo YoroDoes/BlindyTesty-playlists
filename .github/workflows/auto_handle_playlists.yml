@@ -2,12 +2,12 @@ name: Auto accept/reject pull requests
 
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled]
 
 jobs:
   auto_handle_playlists:
     name: Accept or reject playlist
-    if: ${{ contains(github.event.issue.labels.*.name,'playlist') }}
+    if: ${{ contains(github.event.issue.labels.*.name,'playlist') && !contains(github.event.issue.labels.*.name,'closed') }}
 
     runs-on: ubuntu-latest
     permissions:
