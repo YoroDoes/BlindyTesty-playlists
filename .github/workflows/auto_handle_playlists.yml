@@ -2,7 +2,7 @@ name: Auto accept/reject pull requests
 
 on:
   issues:
-    types: [opened, labeled]
+    types: [labeled]
 
 jobs:
   auto_handle_playlists:
