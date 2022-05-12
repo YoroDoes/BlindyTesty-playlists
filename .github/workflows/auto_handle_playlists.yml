@@ -25,10 +25,9 @@ jobs:
       - name: Validate JSON
         id: validation
         uses: ScratchAddons/validate-json-action@master
-        env:
-          schema: .schema.json
-          jsons: playlists/${{ github.event.issue.title }}.json
-          separator: ','
+        with:
+          schema: ./.schema.json
+          jsons: ./playlists/${{ github.event.issue.title }}.json
       - name: Push playlist
         run: ./.github/scripts/push.sh
         env:
